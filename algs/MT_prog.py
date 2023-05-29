@@ -6,8 +6,6 @@ from openpyxl import load_workbook
 import time
 import os
 
-
-
 # выведем данные о пакете MetaTrader5
 print("MetaTrader5 package author: ",mt5.__author__)
 print("MetaTrader5 package version: ",mt5.__version__)
@@ -23,8 +21,6 @@ import pytz
 #Узнаем, какой тикер и код нужно отслеживать
 tck = input('Введите требуемый тикер (код ISIN): ')
 
-
-
 # установим подключение к терминалу MetaTrader 5
 if not mt5.initialize():
     print("initialize() failed, error code =",mt5.last_error())
@@ -37,8 +33,6 @@ try:
         actual_time_stamp = utc_time.timestamp()
         rates = mt5.copy_rates_from(tck.upper(), mt5.TIMEFRAME_M1, actual_time_stamp, 1)
 
-
- 
         # создадим из полученных данных DataFrame
         rates_frame = pd.DataFrame(rates)
         # сконвертируем время в виде секунд в формат datetime
@@ -64,6 +58,6 @@ try:
 except KeyboardInterrupt:
     print('Выполнение программы завершено')
     print('Файл сохранен: ', os.getcwd() + '\\' + str(tck.upper() + ".xlsx"))
+
 # завершим подключение к терминалу MetaTrader 5
 mt5.shutdown()
-
